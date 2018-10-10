@@ -1,0 +1,21 @@
+{
+  "name": "keppalivetest",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "ancestry-dns-cache": "^1.0.180504027",
+    "ancestry-request": "3.0.21",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "electrode-keepalive": "^0.3.5",
+    "express": "~4.16.0",
+    "morgan": "~1.9.0",
+    "on-finished": "^2.3.0",
+    "on-headers": "^1.0.1",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2"
+  }
+}
