@@ -4,13 +4,9 @@ const router = express.Router();
 const apiUrl = 'https://reqres.in/api/users';
 const rp = require('request-promise');
 
-const ancestryRequest = require('ancestry-request').defaults({
-    componentId: "searchui-resultsui",
-    isEdgeSystem: true,
-    timeout: 5000
-});
+const agentElectrodeKeepAlive = new require('../utils/electrode-keepalive.js').getAgentHttps();
 
-const agentKeepAlive = require('ancestry-request/lib/keepAliveAgent').getAgentHttps();
+const agentKeepAlive = require('../utils/keepAlive').getAgentHttps();
 
 const options = {
     uri: apiUrl,
@@ -21,7 +17,7 @@ const options = {
 
 const getUsers = (res, req, agentKeepalive) => {
     if (!agentKeepalive) {
-        const newOptions = Object.assign({}, options, {agent: agentKeepAlive, timeout: 5000});
+        const newOptions = Object.assign({}, options, {agent: agentKeepAlive});
         return rp(newOptions)
             .then(function (htmlString) {
                 res.send({title: 'Express', users: htmlString});
@@ -31,7 +27,8 @@ const getUsers = (res, req, agentKeepalive) => {
                 res.status(500).send(err.message);
             });
     } else {
-        return ancestryRequest.get(options, req)
+        const newOptions = Object.assign({}, options, {agent: agentElectrodeKeepAlive.agent});
+        return rp(newOptions)
             .then(function (htmlString) {
                 res.send({title: 'Express', users: htmlString});
             })
@@ -48,7 +45,7 @@ const getRouter = () => {
         getUsers(res);
     });
 
-    router.get('/api/keepAlive', function (req, res, next) {
+    router.get('/api/electrodeKeepAlive', function (req, res, next) {
         getUsers(res, req, true);
     });
     return router;

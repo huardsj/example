@@ -1,8 +1,8 @@
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const agentHttps = require('ancestry-request/lib/keepAliveAgent').getAgentHttps();
-const agent = require('ancestry-request/lib/keepAliveAgent').getAgent();
+const agentKeepAlive = require('./utils/keepAlive').getAgentHttps();
+const agentElectrode = require('./utils/electrode-keepalive').getAgentHttps();
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -12,8 +12,8 @@ const benchmark = require('./benchmark');
 const app = express();
 
 app.use(benchmark.benchMarkKeepalive({
-    agent,
-    agentHttps
+    agentElectrode: agentElectrode.agent,
+    agentKeepAlive
 }));
 
 app.use(express.json());

@@ -6,8 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "ancestry-dns-cache": "^1.0.180504027",
-    "ancestry-request": "3.0.21",
+    "agentkeepalive": "^3.5.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "electrode-keepalive": "^0.3.5",

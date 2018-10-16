@@ -8,10 +8,10 @@ const app = require('../app');
 const debug = require('debug')('keppalivetest:server');
 const http = require('http');
 
-const dnsCache = require('ancestry-dns-cache');
+//const dnsCache = require('ancestry-dns-cache');
 
 
-dnsCache.DnsCache.init({group: 'test', service: 'keepAlive'});
+//dnsCache.DnsCache.init({group: 'test', service: 'keepAlive'});
 
 /**
  * Get port from environment and store in Express.
